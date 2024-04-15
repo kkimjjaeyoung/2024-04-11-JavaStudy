@@ -15,7 +15,7 @@ public class 연산자_논리연산자_1 {
 		System.out.println("bCheck="+bCheck);
 		System.out.println("x="+x);
 		System.out.println("y="+y);
-
+		
 	}
 
 }
