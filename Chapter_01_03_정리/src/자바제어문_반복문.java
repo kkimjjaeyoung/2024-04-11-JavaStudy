@@ -26,6 +26,8 @@ public class 자바제어문_반복문 {
 		for (int i=1; i<=6; i++) {
 			int num1=(int)(Math.random()*45)+1;
 			System.out.println(num1+" ");
+			
+			
 		}
 	}
 
