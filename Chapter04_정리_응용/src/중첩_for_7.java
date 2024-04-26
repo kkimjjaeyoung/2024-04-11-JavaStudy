@@ -22,7 +22,7 @@ public class 중첩_for_7 {
 		int[] kor=new int[3];
 		int[] eng=new int[3];
 		int[] math=new int[3];
-		String[] name=new String[3];
+		
 		//사용자입력
 		//처리결과값
 		int[] total=new int[3];
@@ -74,7 +74,7 @@ public class 중첩_for_7 {
 		}
 		
 		for(int i=0; i<kor.length; i++) {
-			System.out.printf("%-5d%-5d%-5d%-5d%-7.2f%3c-3d\n", kor[i], eng[i], math[i], total[i], avg[i], score[i], rank[i]);
+			System.out.printf("%-5d%-5d%-5d%-5d%-7.2f%3c-3d%\n", kor[i], eng[i], math[i], total[i], avg[i], score[i], rank[i]);
 		}
 		
 	}
