@@ -9,7 +9,7 @@ public class 배열문제2_7 {
 		// TODO Auto-generated method stub
 		char[] abc=new char[5];
 		for(int i=0; i<abc.length; i++) {
-			abc[i]=((char)(Math.random()*26)+65);
+			abc[i]=(char)(Math.random()*26+65);
 		}
 		System.out.println("변경전");
 		System.out.println(Arrays.toString(abc));
