@@ -42,7 +42,7 @@
  * 		무
  */
 
-import java.util.Arrays;
+import java.util.*;
 import java.util.Scanner;
 public class 중첩_for_6 {
 
