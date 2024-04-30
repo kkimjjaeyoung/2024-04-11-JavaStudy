@@ -4,7 +4,8 @@ import java.util.*;
 public class 메소드1_9 {
 	static boolean isYear(int year){
 		boolean bCheck=false;
-		if((year%4==0 || ))
+		if((year%4==0 || )) {
+			
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
