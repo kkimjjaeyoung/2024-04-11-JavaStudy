@@ -25,7 +25,7 @@ public class MainSerch extends JPanel{
 		la3=new JLabel("~");			//가격 입력칸 사이
 		la4=new JLabel("가격 검색 :");		
 		tf1=new JTextField();			//검색어 입력칸
-		tf2=new JTextField("0");		//가격 입력칸
+		tf2=new JTextField(0);		//가격 입력칸
 		tf3=new JTextField();			//가격 입력칸2
 		b1=new JButton("검색");			//검색 입력 버튼
 		b2=new JButton("검색");				//가격검색 입력버튼
