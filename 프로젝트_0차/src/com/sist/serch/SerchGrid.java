@@ -8,9 +8,20 @@
 
 package com.sist.serch;
 
+import java.awt.Font;
+
 import javax.swing.*;
 
 
 public class SerchGrid extends JPanel{
-	public JButton b1, 
+	
+	public JLabel la1;
+	public SerchGrid() {
+	la1=new JLabel("이름 :");	
+	
+	setLayout(null);
+	la1.setFont(new Font("맑은 고딕",Font.BOLD,35));			//폰트, 글씨크기
+	la1.setBounds(100, 100, 100, 50);							//위치
+	add(la1);
+	}
 }
