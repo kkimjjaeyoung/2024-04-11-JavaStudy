@@ -30,7 +30,7 @@ public class ClientMain extends JFrame implements ActionListener {			//implement
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");		//com.jtattoo.plaf.패키지명.패키지명+LookAndFeel				앞 패키지명은 소문자
+			UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");		// jtattoo적용 : com.jtattoo.plaf.패키지명.패키지명+LookAndFeel				앞 패키지명은 소문자
 		}catch(Exception ex) {}
 		
 		new ClientMain();
