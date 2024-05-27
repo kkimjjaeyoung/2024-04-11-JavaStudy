@@ -13,7 +13,7 @@ import java.text.*;
  * 				File dir=new File("c:\\javaDev\\파일명");
  * 2. 폴더생성 : mkdir()
  * 		파일생성 : createNewFile()
- * 3. 폴더/파일삭제 : delete()
+ * 3. 폴더/파일                               삭제 : delete()
  * 			-> 폴더안에 파일.폴더가 있는경우 삭제불가. 먼저삭제 후 삭제
  * 4. 폴더안에 있는 파일/폴더의 정보 읽기 : listFiles() : file[] 
  * 		

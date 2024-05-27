@@ -17,6 +17,7 @@ public class 라이브러리_6 {
 		// TODO Auto-generated method stub
 		FileInputStream fis=null;		//초기화
 		FileOutputStream fos=null;
+		
 		try {
 			
 		}catch(Exception ex) {
