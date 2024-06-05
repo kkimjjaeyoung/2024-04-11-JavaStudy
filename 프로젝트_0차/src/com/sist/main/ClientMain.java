@@ -8,10 +8,12 @@ import java.util.*;
 
 import com.sist.serch.MainSerch;
 import com.sist.serch.SerchGrid;
+import com.sist.serch.ChatGrid;
 
 public class ClientMain extends JFrame implements ActionListener{
 	public MainSerch ms=new MainSerch();
 	public SerchGrid sg=new SerchGrid();
+	public ChatGrid cg=new ChatGrid();
 	
 	public ClientMain() {
 		setLayout(null);				//레이아웃 배치
@@ -19,6 +21,8 @@ public class ClientMain extends JFrame implements ActionListener{
 		add(ms);						//ms레이아웃 배치
 		sg.setBounds(0, 220, 1920, 960);
 		add(sg);
+		cg.setBounds(0, 150, 1920, 200);
+		add(cg);
 		
 		//윈도우크기
 		setSize(1920, 1080);

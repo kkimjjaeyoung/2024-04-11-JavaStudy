@@ -19,6 +19,7 @@ public class MainSerch extends JPanel{
 	public JRadioButton rb1;
 	
 	//검색창
+	//	이름, 부서명, 직책
 	public MainSerch() {
 		la1=new JLabel("이름 :");			//검색 택스트
 		la2=new JLabel("빠른배송");		//체크 택스트
