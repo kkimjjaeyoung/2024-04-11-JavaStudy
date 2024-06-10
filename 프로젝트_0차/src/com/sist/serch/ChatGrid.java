@@ -30,8 +30,8 @@ public class ChatGrid extends JPanel{
     	b1.setBounds(40, 15, 100, 40);							//위치
     	add(b1);
     	
-    	la1.setFont(new Font("맑은 고딕",Font.BOLD,35));			//폰트, 글씨크기
-    	la1.setBounds(40, 15, 100, 40);							//위치
+    	jp1.setFont(new Font("맑은 고딕",Font.BOLD,35));			//폰트, 글씨크기
+    	jp1.setBounds(40, 15, 100, 40);							//위치
     	add(jp1);
 	}
 }
