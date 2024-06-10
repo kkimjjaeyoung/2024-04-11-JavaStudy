@@ -36,6 +36,15 @@ public class MemberDAO {
 	//모든 DAO에 공통사항
 	//기능 : 로그인처리, 회원가입, 회원수정, 회원탈퇴,
 	public String memberLogin(int empno, String ename) {
-		
+		String result="";
+		try {
+			getconnection();
+			String sql="SELECT COUNT(*) FROM emp" + "WHERE empno="+ empno;
+			ps=conn.prepareStatement(sql);
+			ResultSet re=ps.executeQuery();
+			re.next();
+			int count=re.getInt(1);
+			
+		}
 	}
 }
