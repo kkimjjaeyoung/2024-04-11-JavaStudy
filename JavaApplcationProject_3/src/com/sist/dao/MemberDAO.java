@@ -44,7 +44,8 @@ public class MemberDAO {
 			ResultSet re=ps.executeQuery();
 			re.next();
 			int count=re.getInt(1);
-			
+			re.close();
+			int count=re.
 		}
 	}
 }
