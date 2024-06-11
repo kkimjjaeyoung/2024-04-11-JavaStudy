@@ -11,12 +11,14 @@ public class ClientMain extends JFrame implements ActionListener{
     LoginPanel lp=new LoginPanel();
     MainPanel mp=new MainPanel();
     JoinPanel jp=new JoinPanel();
+    PostFindFrame post=new PostFindFrame();
     public ClientMain()
     {
     	setLayout(card);
     	add("LOGIN",lp);
     	add("MP",mp);
     	add("JP",jp);
+    	add("POST", post);
     	setSize(960, 700);
     	setResizable(false);
     	setVisible(true);
@@ -54,7 +56,7 @@ public class ClientMain extends JFrame implements ActionListener{
 		}
 		else if(e.getSource()==jp.b2) {
 			for(int i=post.model.getRowCount()-1; i>=0; i--) {
-				post.model.removeRow()
+				post.model.removeRow(i);		
 			}
 			post.tf.setText("");
 			post.setVisible(true);
