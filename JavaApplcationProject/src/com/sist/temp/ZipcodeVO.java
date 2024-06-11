@@ -6,3 +6,8 @@ import lombok.Data;
 public class ZipcodeVO {
   private String zipcode,sido,gugun,dong,bunji;
 }
+
+
+
+
+
