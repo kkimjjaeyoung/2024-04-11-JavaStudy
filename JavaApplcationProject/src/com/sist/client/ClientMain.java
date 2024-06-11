@@ -27,6 +27,10 @@ public class ClientMain extends JFrame implements ActionListener{
     	lp.joinBtn.addActionListener(this);// 회원가입 
     	lp.cancelBtn.addActionListener(this);// 종료
     	
+    	post.b1.addActionListener(this);//우편검색버튼
+    	post.b2.addActionListener(this);//취소
+    	post.tf.addActionListener(this);//우편번호검색
+    	
     }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -47,6 +51,16 @@ public class ClientMain extends JFrame implements ActionListener{
 		else if(e.getSource()==lp.joinBtn)
 		{
 			card.show(getContentPane(), "JP");
+		}
+		else if(e.getSource()==jp.b2) {
+			for(int i=post.model.getRowCount()-1; i>=0; i--) {
+				post.model.removeRow()
+			}
+			post.tf.setText("");
+			post.setVisible(true);
+		}
+		else if(e.getSource()==jp.b4) {
+			card.show(getContentPane(), "Login");
 		}
 		else if(e.getSource()==lp.loginBtn)
 		{
