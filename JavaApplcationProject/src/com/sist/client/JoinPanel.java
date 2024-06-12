@@ -44,7 +44,7 @@ public class JoinPanel extends JPanel{
     	nLa.setBounds(150, 150, 90, 30);
     	add(nLa);
     	
-    	nametf=new JPasswordField();
+    	nametf=new JTextField();
     	nametf.setBounds(265, 150, 200, 30);
     	add(nametf);
     	////////////////////////////////////////////////////////////////
@@ -61,7 +61,7 @@ public class JoinPanel extends JPanel{
     	add(rb2);
     	
     	ButtonGroup bg=new ButtonGroup();
-    	bg.add(rb1); bg.add(rb2);
+    	bg.add(rb1); bg.add(rb2);					//한개만 선택하기 위해 묶어서 처리
     	
     	rb1.setSelected(true);
     	/////////////////////////////////////////////////////////////
