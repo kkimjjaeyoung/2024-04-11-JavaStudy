@@ -15,9 +15,10 @@ import javax.swing.*;
 
 
 public class SerchGrid extends JPanel{
+	JTextField tf;
+	JRadioButton rb1, rb2, rb3;
+	JButton tfb, tb1, tb2, tb3, tb4, tb5, tb6;
+	JTable jt;
 	
-	public SerchGrid() {
-		// TODO Auto-generated constructor stub
-		setBackground(Color.yellow);
-	} 
+	
 }
