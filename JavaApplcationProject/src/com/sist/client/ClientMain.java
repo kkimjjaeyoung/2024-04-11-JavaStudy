@@ -36,7 +36,7 @@ public class ClientMain extends JFrame implements ActionListener, MouseListener{
     	jp.b1.addActionListener(this);//아이디 중복체크 버튼
     	jp.b4.addActionListener(this);// 취소
     	jp.b2.addActionListener(this);// 우편번호 검색 
-    	jp.b2.addActionListener(null);
+    	jp.b3.addActionListener(this);
     	
     	post.b1.addActionListener(this);// 우편 검색 버튼 
     	post.b2.addActionListener(this);// 취소 
