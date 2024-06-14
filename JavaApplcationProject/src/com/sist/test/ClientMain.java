@@ -74,7 +74,7 @@ public class ClientMain extends JFrame implements ActionListener, Runnable{
 			else {
 				//서버와 연결
 				try {
-					s=new Socket("localhost", 3355);
+					s=new Socket("localhost", 4582);
 					in=new BufferedReader(new InputStreamReader(s.getInputStream()));
 					out=s.getOutputStream();	//서버와 연결 완료
 					//서버로 로그인 요청
