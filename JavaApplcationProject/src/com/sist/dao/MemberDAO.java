@@ -122,7 +122,6 @@ public class MemberDAO {
 		   ps.setString(3, vo.getName());
 		   ps.setString(4, vo.getSex());
 		   ps.setString(5, vo.getBirthday());
-		   
 		   ps.setString(6, vo.getPost());
 		   ps.setString(7, vo.getAddr1());
 		   ps.setString(8, vo.getAddr2());
