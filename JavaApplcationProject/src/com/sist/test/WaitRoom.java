@@ -15,6 +15,9 @@ public class WaitRoom extends JPanel{
 		String[][] row1=new String[0][4];
 		
 		model1=new DefaultTableModel(row1,col1);	//데이터관리
+		{				//익명의 클래스
+			
+		}
 		table1=new JTable(model1);		//모양잡기					//MV
 		
 		JScrollPane js1=new JScrollPane(table1);

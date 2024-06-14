@@ -34,5 +34,6 @@ public class Login extends JPanel{
 		add(pf);
 		
 		p.setBounds(10, 85, 235, 35);
+		add(p);
 	}
 }
