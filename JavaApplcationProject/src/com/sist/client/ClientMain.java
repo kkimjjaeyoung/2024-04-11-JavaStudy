@@ -47,7 +47,7 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
     	
     	mp.setBounds(300, 15, 600, 35);
     	add(mp);
-    	cp.setBounds(10, 60, 930, 500);
+    	cp.setBounds(10, 60, 930, 600);
     	add(cp);
     	
     	setSize(960, 700);
@@ -74,6 +74,11 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
     	idfrm.b1.addActionListener(this);// 아이디 체크
     	idfrm.b2.addActionListener(this);// 확인 
     	
+    	mp.exitBtn.addActionListener(this);
+    	mp.chatBtn.addActionListener(this);
+    	mp.homeBtn.addActionListener(this);
+    	
+    	cp.chatP.tf.addActionListener(this);
     }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -91,6 +96,34 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 			dispose();// window메모리 해제 
 			System.exit(0);// 프로그램 종료
 		}
+		else if(e.getSource()==cp.chatP.tf) {
+			String msg=cp.chatP.tf.getText();
+			if(msg.length()<1)
+				return;
+			String color=cp.chatP.box1.getSelectedItem().toString();
+			
+			try {
+				out.write((Function.CHAT+"|"+msg+"|"+color+"\n").getBytes());
+			}catch(Exception ex) {}
+			cp.chatP.tf.setText("");
+			cp.chatP.tf.requestFocus();
+		}
+		else if(e.getSource()==mp.exitBtn)
+		{
+			try
+			{
+				out.write((Function.EXIT+"|\n").getBytes());
+			}catch(Exception ex){}
+		}
+		else if(e.getSource()==mp.chatBtn)
+		{
+			cp.card.show(cp, "CHAT");
+		}
+		else if(e.getSource()==mp.homeBtn)
+		{
+			cp.card.show(cp, "HP");
+		}
+		
 		else if(e.getSource()==jp.b1)// 아이디 중복 체크 
 		{
 			idfrm.tf.setText("");
@@ -329,7 +362,7 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 					try
 					{
 						//1. 소켓 => 전화 걸기 
-						s=new Socket("192.168.10.124",1521); // 조별 
+						s=new Socket("192.168.10.116",2226); 
 						out=s.getOutputStream();
 						System.out.println("id="+id);
 						in=new BufferedReader(new InputStreamReader(s.getInputStream()));
@@ -400,14 +433,69 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 				{
 				  case Function.LOGIN:
 				  {
-					
+					  String[] data= {
+						 st.nextToken(),
+						 st.nextToken(),
+						 st.nextToken()
+					  };
+					  cp.chatP.model.addRow(data);
+					  String admin=st.nextToken();
+					  
+					  if(!myId.equals(data[0]) && admin.equals("y"))
+					  {
+						  cp.chatP.box2.addItem(data[0]);
+					  }
+					  
 				  }
 				  break;
 				  case Function.MYLOG:
 				  {
+					  myId=st.nextToken();
+					  String name=st.nextToken();
+					  setTitle(name+"님의 채팅창");
 					  lp.setVisible(false);
 					  setVisible(true);
 				  }
+				  break;
+				  case Function.CHAT:
+				  {
+					  String message=st.nextToken();
+					  String color=st.nextToken();
+					  cp.chatP.initStyle();
+					  
+					  cp.chatP.append(message, color);
+				  }
+				  break;
+				  case Function.MYEXIT:
+				  {
+					  System.exit(0);
+				  }
+				  break;
+				  case Function.EXIT:
+				  {
+					  String yid=st.nextToken();
+					  for(int i=0;i<cp.chatP.model.getRowCount();i++)
+					  {
+						  String s=cp.chatP.model.getValueAt(i, 0).toString();
+						  // 테이블에 등록된 ID읽기 
+						  if(s.equals(yid))
+						  {
+							  cp.chatP.model.removeRow(i);
+							  break;
+						  }
+					  }
+					  for(int i=0;i<cp.chatP.box2.getItemCount();i++)
+					  {
+						  String s=cp.chatP.box2.getItemAt(i);
+						  if(s.equals(yid))
+						  {
+							  cp.chatP.box2.removeItemAt(i);
+							  break;
+						  }
+					  }
+					  
+				  }
+				  break;
 				}
 			}
 		}catch(Exception ex) {ex.printStackTrace();}

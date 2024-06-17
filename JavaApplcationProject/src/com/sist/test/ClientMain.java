@@ -86,7 +86,7 @@ public class ClientMain extends JFrame implements ActionListener,Runnable,MouseL
 				// 서버와 연결 
 				try
 				{
-					s=new Socket("localhost",3355);
+					s=new Socket("192.168.10.116",2226);
 					in=new BufferedReader(new InputStreamReader(s.getInputStream()));
 					out=s.getOutputStream();
 					//  서버와 연결 완료 
