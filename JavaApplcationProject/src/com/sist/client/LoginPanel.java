@@ -1,7 +1,7 @@
 package com.sist.client;
 import javax.swing.*;
 import java.awt.*;
-public class LoginPanel extends JPanel{
+public class LoginPanel extends JFrame{
     Image back;
     JLabel idLa,pwdLa;
     JTextField tf;
@@ -10,7 +10,7 @@ public class LoginPanel extends JPanel{
     
     public LoginPanel()
     {
-    	back=Toolkit.getDefaultToolkit().getImage("C:\\Users\\sist113_1\\Downloads\\이미지 모음집\\m7.jpg");		//로그인 화면 배경
+    	back=Toolkit.getDefaultToolkit().getImage("c:\\project_image\\back.jpg");
     	
     	idLa=new JLabel("아이디",JLabel.RIGHT);
     	pwdLa=new JLabel("비밀번호",JLabel.RIGHT);
@@ -39,13 +39,16 @@ public class LoginPanel extends JPanel{
     	p.setOpaque(false);
     	p.setBounds(650, 615, 265, 35);
     	add(p);
+    	
+    	setSize(960, 700);
+    	setVisible(true);
     }
     
     // 스킨 => 이미지 배경 => 
-	@Override
-	protected void paintComponent(Graphics g) {
-		g.drawImage(back, 0, 0,getWidth(),getHeight(),this);
-	}
+	/*
+	 * @Override protected void paintComponent(Graphics g) { g.drawImage(back, 0,
+	 * 0,getWidth(),getHeight(),this); }
+	 */
     
     
 }

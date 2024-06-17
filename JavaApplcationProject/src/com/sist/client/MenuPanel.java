@@ -1,4 +1,4 @@
-package com.sist.client;
+	package com.sist.client;
 import java.awt.*;
 import javax.swing.*;
 public class MenuPanel extends JPanel{
