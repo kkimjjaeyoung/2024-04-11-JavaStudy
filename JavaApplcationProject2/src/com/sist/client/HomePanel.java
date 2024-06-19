@@ -13,11 +13,12 @@ import java.net.*;
 
 public class HomePanel extends JPanel implements ActionListener,MouseListener{
     JPanel pan=new JPanel(); // 12개 이미지 출력 
+    //JPanel panplus=new JPanel();
     JButton b1,b2; // 이전 , 다음 
     JLabel pagename;
     JLabel la=new JLabel("0 page / 0 pages");	//페이지 확인 라벨
     JLabel[] imgs=new JLabel[12];			// 미리보기 이미지 라벨 
-    JLabel[] titles=new JLabel[12];
+    //JLabel[] titles=new JLabel[12];
     
     int curpage=1; // 현재 페이지 
     int totalpage=0; // 총페이지 
@@ -35,6 +36,7 @@ public class HomePanel extends JPanel implements ActionListener,MouseListener{
     	this.cp=cp;
     	dao=GoodsDAO.newInstance();
     	pan.setLayout(new GridLayout(4,3,3,30));
+    	//panplus.setLayout(new GridLayout(2,1,0,0));
     	
     	setLayout(new BorderLayout());
     	add("North", pagename);
@@ -62,18 +64,21 @@ public class HomePanel extends JPanel implements ActionListener,MouseListener{
     			URL url=new URL(vo.getGoods_poster());					// 제품 화면
     			Image img=ImageChange.getImage(new ImageIcon(url), 160, 120);			// 이미지 크기 축소 
     			imgs[i]=new JLabel(new ImageIcon(img));			// 이미지 미리보기 아이콘
-    			imgs[i].setToolTipText("가격 : "+vo.getGoods_price()+" 조회수 : "+vo.getHit()+"-No."+vo.getNo());
-
-
+    			imgs[i].setToolTipText("가격 : "+vo.getGoods_price()+" 조회수 : "+vo.getHit()+" - No."+vo.getNo());
+    			imgs[i].setText(vo.getGoods_name());
 				
-				titles[i]=new JLabel();
-				titles[i].setText(vo.getGoods_name());
-				 
+    			//titles[i]=new JLabel();
+    			//titles[i].setText(vo.getGoods_name());
     			
-    			pan.add(imgs[i], "North");
-    			pan.add(titles[i], "South");
+    			//panplus.add(imgs[i], "Notrh");
+    			//panplus.add(titles[i], "South");
+    			
+    			//pan.add(panplus);
+    			pan.add(imgs[i]);
+    			//pan.add(titles[i]);
     			
     			imgs[i].addMouseListener(this);
+    			
     		}catch(Exception ex){}
     	}
     	la.setText(curpage+" page / "+totalpage+" pages");
@@ -119,7 +124,7 @@ public class HomePanel extends JPanel implements ActionListener,MouseListener{
 				if(e.getClickCount()==2)
 				{
 					String no=imgs[i].getToolTipText();
-					no=no.substring(no.lastIndexOf("-No.")+4);
+					no=no.substring(no.lastIndexOf(" - No.")+6);
 					cp.dp.print(Integer.parseInt(no));
 					cp.card.show(cp, "DP");
 				}
