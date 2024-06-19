@@ -8,6 +8,10 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="C:/javaDev/ojdbc8.jar"/>
 	<classpathentry kind="lib" path="C:/javaDev/lombok-1.18.32.jar"/>
+<<<<<<< HEAD
+	<classpathentry kind="lib" path="C:/Users/71kim/Desktop/Java/eclipse/Jar/lombok.jar"/>
+=======
 	<classpathentry kind="lib" path="C:/javaDev/JTattoo-1.6.13.jar"/>
+>>>>>>> branch 'master' of https://github.com/kkimjjaeyoung/2024-04-11-JavaStudy.git
 	<classpathentry kind="output" path="bin"/>
 </classpath>
