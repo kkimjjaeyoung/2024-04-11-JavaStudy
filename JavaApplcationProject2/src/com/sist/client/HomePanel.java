@@ -14,9 +14,9 @@ import java.net.*;
 public class HomePanel extends JPanel implements ActionListener,MouseListener{
     JPanel pan=new JPanel(); // 12개 이미지 출력 
     JButton b1,b2; // 이전 , 다음 
-    JLabel pagename, laname, laprice;
+    JLabel pagename;
     JLabel la=new JLabel("0 page / 0 pages");	//페이지 확인 라벨
-    JLabel[] imgs=new JLabel[16];			// 미리보기 이미지 라벨 
+    JLabel[] imgs=new JLabel[12];			// 미리보기 이미지 라벨 
     
     int curpage=1; // 현재 페이지 
     int totalpage=0; // 총페이지 
@@ -27,13 +27,13 @@ public class HomePanel extends JPanel implements ActionListener,MouseListener{
     public HomePanel(ControllPanel cp)
     {
     	setLayout(null);
-    	pagename=new JLabel("사이트명", JLabel.CENTER);
-    	Font titlefont=new Font("맑은 고딕", Font.PLAIN, 35);
-    	pagename.setFont(titlefont);
+    	pagename=new JLabel("구매 페이지", JLabel.CENTER);				//페이지 제목
+    	Font titlefont=new Font("맑은 고딕", Font.PLAIN, 35);			//페이지 제목 폰트 설정
+    	pagename.setFont(titlefont);								//페이지 제목 폰트 적용
     	
     	this.cp=cp;
     	dao=GoodsDAO.newInstance();
-    	pan.setLayout(new GridLayout(4,4,3,30));
+    	pan.setLayout(new GridLayout(4,3,3,30));
     	
     	setLayout(new BorderLayout());
     	add("North", pagename);
@@ -59,11 +59,11 @@ public class HomePanel extends JPanel implements ActionListener,MouseListener{
     		try
     		{
     			URL url=new URL(vo.getGoods_poster());					// 제품 화면
-    			Image img=ImageChange.getImage(new ImageIcon(url), 160, 128);			// 이미지 크기 축소 
+    			Image img=ImageChange.getImage(new ImageIcon(url), 160, 120);			// 이미지 크기 축소 
     			imgs[i]=new JLabel(new ImageIcon(img));			// 이미지 미리보기 아이콘
     			imgs[i].setToolTipText(vo.getGoods_price()+"^"+vo.getNo());
     			imgs[i].setText(vo.getGoods_name());
-    			pan.add(imgs[i]);
+    			pan.add(imgs[i], "North");
     			imgs[i].addMouseListener(this);
     		}catch(Exception ex){}
     	}

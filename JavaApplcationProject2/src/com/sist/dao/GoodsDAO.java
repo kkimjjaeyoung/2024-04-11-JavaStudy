@@ -176,10 +176,9 @@ public class GoodsDAO {
     	 try
     	 {
     		 getConnection();
-    		 String sql="SELECT no,goods_name,goods_poster,num "
-    				   +"FROM (SELECT no,goods_name,goods_poster,rownum as num "
-    				   +"FROM (SELECT no,goods_name,goods_poster "
-    				   +"FROM goods_all ORDER BY no ASC)) "
+    		 String sql="SELECT no,goods_name,goods_poster, goods_price, hit,num "
+    				   +"FROM (SELECT no,goods_name,goods_poster, goods_price, hit ,rownum as num "
+    				   +"FROM (SELECT no,goods_name,goods_poster, goods_price, hit FROM goods_all ORDER BY hit DESC)) "			//hit순 정렬
     				   +"WHERE num BETWEEN ? AND ?";
     		 // 오라클 페이지 나누기 => 인라인뷰 => 가상 컬럼 : rownum (자르기)
     		 // rownum은 Top-N => 처음부터 몇개 => 중간이 다르는 것은 불가능 
@@ -202,6 +201,8 @@ public class GoodsDAO {
     			 vo.setNo(rs.getInt(1));
     			 vo.setGoods_name(rs.getString(2));
     			 vo.setGoods_poster(rs.getString(3));
+    			 vo.setGoods_price(rs.getString(4));
+    			 vo.setHit(rs.getInt(5));
     			 list.add(vo);
     		 }
     		 
