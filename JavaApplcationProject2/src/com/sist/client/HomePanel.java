@@ -27,7 +27,7 @@ public class HomePanel extends JPanel implements ActionListener,MouseListener{
     public HomePanel(ControllPanel cp)
     {
     	setLayout(null);
-    	pagename=new JLabel("구매 페이지", JLabel.CENTER);				//페이지 제목
+    	pagename=new JLabel("상품 페이지", JLabel.CENTER);				//페이지 제목
     	Font titlefont=new Font("맑은 고딕", Font.PLAIN, 35);			//페이지 제목 폰트 설정
     	pagename.setFont(titlefont);								//페이지 제목 폰트 적용
     	
