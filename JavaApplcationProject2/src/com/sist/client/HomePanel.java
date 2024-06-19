@@ -63,6 +63,7 @@ public class HomePanel extends JPanel implements ActionListener,MouseListener{
     			imgs[i]=new JLabel(new ImageIcon(img));			// 이미지 미리보기 아이콘
     			imgs[i].setToolTipText(vo.getGoods_price()+"^"+vo.getNo());
     			imgs[i].setText(vo.getGoods_name());
+    			
     			pan.add(imgs[i], "North");
     			imgs[i].addMouseListener(this);
     		}catch(Exception ex){}
