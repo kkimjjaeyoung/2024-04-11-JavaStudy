@@ -10,7 +10,7 @@ public class LoginPanel extends JFrame{
     
     public LoginPanel()
     {
-    	back=Toolkit.getDefaultToolkit().getImage(".jpg");		//로그인화면 배경 이미지
+    	back=Toolkit.getDefaultToolkit().getImage("c:\\project_image\\back.jpg");
     	
     	idLa=new JLabel("아이디",JLabel.RIGHT);
     	pwdLa=new JLabel("비밀번호",JLabel.RIGHT);

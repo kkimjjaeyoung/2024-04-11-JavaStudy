@@ -47,12 +47,12 @@ public class EmpDeptDAO {
 	   // 1. 오라클을 배우는 목적 => 자바에서 사용이 가능 => 2주 
 	   public ArrayList<EmpVO> empListData()
 	   {
-		   ArrayList<EmpVO> list=new ArrayList<EmpVO>();{
+		   ArrayList<EmpVO> list=new ArrayList<EmpVO>();
 		   try
 		   {
 			   getConnection();
-			   String sql="SELECT empno,ename,job,hiredate,deptno "
-					     +"FROM emp, deptno"
+			   String sql="SELECT empno,ename,job,hiredate,dname,loc "
+					     +"FROM emp,dept "
 					     +"WHERE emp.deptno=dept.deptno";
 			   ps=conn.prepareStatement(sql);
 			   ResultSet rs=ps.executeQuery();
@@ -77,49 +77,5 @@ public class EmpDeptDAO {
 			   disConnection();
 		   }
 		   return list;
-		   
-		   
-		   }
 	   }
-		   // 검색 => LIKE 
-		   
-		   public ArrayList<EmpVO> empFindData(String name){
-		    	 ArrayList<EmpVO> list=new ArrayList<EmpVO>();
-		    	 try
-		    	 {
-		    		 getConnection();
-		    		 String sql="SELECT empno,ename,job,hiredate,deptno "
-		    				 +"FROM emp, deptno "
-		    				   +"WHERE ename LIKE '%'||?||'%' "
-		    				   +"ORDER BY no ASC";
-		    		 ps=conn.prepareStatement(sql);
-		    		 ps.setString(1, name);
-		    		 
-		    		 ResultSet rs=ps.executeQuery();
-		    		 while(rs.next())
-		    		 {
-		    			 EmpVO evo=new EmpVO();
-		    			 evo.setEmpno(rs.getInt(1));
-		    			 evo.setEname(rs.getString(2));
-		    			 evo.setJob(rs.getString(3));
-		    			 evo.setHiredate(rs.getDate(4));
-		    			 evo.setDeptno(rs.getInt(5));
-
-		    			 
-		    			 list.add(evo);
-		    		 }
-		    		 rs.close();
-		    	 }catch(Exception ex)
-		    	 {
-		    		 ex.printStackTrace();
-		    	 }
-		    	 finally
-		    	 {
-		    		 disConnection();
-		    	 }
-		    	 return list;
-		     }
-		     // 구매 => INSERT , UPDATE , DELETE 
-		   
-	  }
 }

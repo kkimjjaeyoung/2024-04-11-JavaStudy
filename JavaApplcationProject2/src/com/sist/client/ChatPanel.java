@@ -111,5 +111,5 @@ public class ChatPanel extends JPanel{
     	}catch(Exception ex){}
     	
     }
-}
     
+}

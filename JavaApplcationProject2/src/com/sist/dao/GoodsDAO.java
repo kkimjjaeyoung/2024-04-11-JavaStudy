@@ -1,4 +1,4 @@
-	package com.sist.dao;
+package com.sist.dao;
 import java.util.*;
 import java.sql.*;
 /*
@@ -217,43 +217,60 @@ public class GoodsDAO {
      }
      // 상세보기 => 한개에 대한 정보 
      /*
-      *   NO                                                 NUMBER(38)
-      GOODS_NAME                                         VARCHAR2(4000)
-      GOODS_SUB                                          VARCHAR2(4000)
-      GOODS_PRICE                                        VARCHAR2(26)
-      GOODS_DISCOUNT                                     NUMBER(38)
-      GOODS_FIRST_PRICE                                  VARCHAR2(26)
-      GOODS_DELIVERY                                     VARCHAR2(26)
-      GOODS_POSTER                                       VARCHAR2(4000)
+      * NO                                                 NUMBER(38)
+		 GOODS_NAME                                         VARCHAR2(4000)
+		 GOODS_SUB                                          VARCHAR2(4000)
+		 GOODS_PRICE                                        VARCHAR2(26)
+		 GOODS_DISCOUNT                                     NUMBER(38)
+		 GOODS_FIRST_PRICE                                  VARCHAR2(26)
+		 GOODS_DELIVERY                                     VARCHAR2(26)
+		 GOODS_POSTER 
       */
-     public GoodsVO goodsDetailData(int no) {
+     public GoodsVO goodsDetailData(int no)
+     {
     	 GoodsVO vo=new GoodsVO();
-    	 try {
+    	 try
+    	 {
     		 getConnection();
-    		 String sql="UPDATE goods+all SET"
-    		 		+ "hit=hit+1"
-    		 		+ "WHERE no=?";
+    		 // 조회수 증가 
+    		 String sql="UPDATE goods_all SET "
+    				   +"hit=hit+1 "
+    				   +"WHERE no=?";
     		 ps=conn.prepareStatement(sql);
     		 ps.setInt(1, no);
-    		 ps.executeUpdate();		//commit
+    		 ps.executeUpdate(); // commit()
     		 
-    		 //데이터 읽기
-    		 sql="SELECT no, goods_name, goods_sub, goods_price, goods_discount, goods_first_price, goods_delivery, goods_poster"
-    		 		+ "FROM goods_all"
-    		 		+ "WHERE no=?";
+    		 // 데이터 읽기
+    		 sql="SELECT no,goods_name,goods_sub,goods_price,goods_discount,"
+    		    +"goods_first_price,goods_delivery,goods_poster "
+    			+"FROM goods_all "
+    		    +"WHERE no=?";
     		 
     		 ps=conn.prepareStatement(sql);
-    		 //?에 값채우기
+    		 // ?에 값을 채운다 
     		 ps.setInt(1, no);
     		 
-    		 //결과값
-    		 ResultSet re=ps.executeQuery();
-    		 re.next();
-    		 //값을 vo에 저장
-    		 re.close();
-    	 }catch (Exception ex) {
+    		 // 결과값 
+    		 ResultSet rs=ps.executeQuery();
+    		 rs.next();
+    		 // 값을 VO에 저장 
+    		 vo.setNo(rs.getInt(1));
+    		 vo.setGoods_name(rs.getString(2));
+    		 vo.setGoods_sub(rs.getString(3));
+    		 vo.setGoods_price(rs.getString(4));
+    		 vo.setGoods_discount(rs.getInt(5));
+    		 vo.setGoods_first_price(rs.getString(6));
+    		 vo.setGoods_delivery(rs.getString(7));
+    		 vo.setGoods_poster(rs.getString(8));
+    		 rs.close();
+    		 
+    		 
+    	 }catch(Exception ex)
+    	 {
     		 ex.printStackTrace();
-    	 }finally {
+    	 }
+    	 finally
+    	 {
     		 disConnection();
     	 }
     	 return vo;
@@ -297,3 +314,11 @@ public class GoodsDAO {
      // 구매 => INSERT , UPDATE , DELETE 
      
 }
+
+
+
+
+
+
+
+

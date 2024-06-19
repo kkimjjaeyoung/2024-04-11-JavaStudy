@@ -1,5 +1,4 @@
 package com.sist.server;
-
 class MyThread extends Thread
 {
 	// Thread를 사용시 => run()에서 동작 구현 

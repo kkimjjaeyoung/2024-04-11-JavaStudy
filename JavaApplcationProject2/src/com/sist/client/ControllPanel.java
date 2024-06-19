@@ -21,8 +21,9 @@ public class ControllPanel extends JPanel{
 	   fp=new FindPanel(this);
 	   add("HP",hp);
 	   add("CHAT",chatP);
-	   add("DP", dp);
-	   add("FP", fp);
+	   add("DP",dp);
+	   add("FP",fp);
+	   
 	  
    }
 }
