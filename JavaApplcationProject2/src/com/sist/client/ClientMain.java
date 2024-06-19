@@ -210,7 +210,6 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 			}
 			
 			String addr2=jp.addrtf2.getText();
-			String content=jp.cta.getText();
 			// phone => NOT NULL => 반드시 입력...
 			MemberVO vo=new MemberVO();
 			vo.setId(id);
@@ -223,7 +222,6 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 			vo.setAddr2(addr2);
 			vo.setEmail(email);
 			vo.setPhone(phone);
-			vo.setContent(content);
 			
 			MemberDAO dao=MemberDAO.newInstance();
 			String res=dao.memberInsert(vo);
@@ -373,7 +371,7 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 					try
 					{
 						//1. 소켓 => 전화 걸기 
-						s=new Socket("192.168.10.116",2226); // 조별 
+						s=new Socket("192.168.10.116", 2226); // 조별 
 						out=s.getOutputStream();
 						System.out.println("id="+id);
 						in=new BufferedReader(new InputStreamReader(s.getInputStream()));

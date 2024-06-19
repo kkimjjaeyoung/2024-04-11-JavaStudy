@@ -115,6 +115,7 @@ public class GoodsDAO {
     	 return dao;
      }
      ////////////////////////////////////////// DAO의 필수 공통 코드 
+     
      // 기능 
      // 총페이지 구하기 
      public int goodsTotalPage()
@@ -242,7 +243,7 @@ public class GoodsDAO {
     		 
     		 // 데이터 읽기
     		 sql="SELECT no,goods_name,goods_sub,goods_price,goods_discount,"
-    		    +"goods_first_price,goods_delivery,goods_poster "
+    		    +"goods_first_price,goods_delivery,goods_poster, hit "
     			+"FROM goods_all "
     		    +"WHERE no=?";
     		 
@@ -262,6 +263,7 @@ public class GoodsDAO {
     		 vo.setGoods_first_price(rs.getString(6));
     		 vo.setGoods_delivery(rs.getString(7));
     		 vo.setGoods_poster(rs.getString(8));
+    		 vo.setHit(rs.getInt(9));
     		 rs.close();
     		 
     		 

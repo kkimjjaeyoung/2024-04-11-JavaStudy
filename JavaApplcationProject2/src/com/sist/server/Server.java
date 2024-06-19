@@ -55,7 +55,7 @@ public class Server implements Runnable{
 	 *    
 	 */
 	private ServerSocket ss; // 접속을 받는 클래스 
-	private final int PORT=3355;
+	private final int PORT=2226;
 	// 클라이언트의 정보 저장 => IP , PORT , id , name , sex
 	//                                ---- => Oracle에서 정보를 가지고 온다 
 	private Vector<Client> waitVc=new Vector<Client>();

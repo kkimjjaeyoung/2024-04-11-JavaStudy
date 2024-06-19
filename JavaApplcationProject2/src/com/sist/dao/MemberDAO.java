@@ -1,10 +1,11 @@
 package com.sist.dao;
 import java.util.*;
 import java.sql.*;
+import java.sql.Date;
 public class MemberDAO {
    private Connection conn;
    private PreparedStatement ps;
-   private final String URL="jdbc:oracle:thin:@localhost:1521:XE";
+   private final String URL="jdbc:oracle:thin:@192.168.10.124:1521:XE";
    // localhost => 192.168.10.124
    private static MemberDAO dao; // 싱글턴 
    
@@ -21,7 +22,7 @@ public class MemberDAO {
    {
 	   try
 	   {
-		   conn=DriverManager.getConnection(URL,"hr","happy");// hr2
+		   conn=DriverManager.getConnection(URL,"hr3","happy");// hr2
 		   // conn hr/happy
 	   }catch(Exception ex) {}
    }
@@ -142,7 +143,7 @@ public class MemberDAO {
 	   try
 	   {
 		   getConnection();
-		   String sql="SELECT name,sex,addr1,phone,content,email "
+		   String sql="SELECT name,sex,addr1,phone,email "
 				     +"FROM member "
 				     +"WHERE id=?";
 		   ps=conn.prepareStatement(sql);
@@ -153,8 +154,7 @@ public class MemberDAO {
 		   vo.setSex(rs.getString(2));
 		   vo.setAddr1(rs.getString(3));
 		   vo.setPhone(rs.getString(4));
-		   vo.setContent(rs.getString(5));
-		   vo.setEmail(rs.getString(6));
+		   vo.setEmail(rs.getString(5));
 		   rs.close();
 	   }catch(Exception ex)
 	   {
@@ -193,7 +193,7 @@ public class MemberDAO {
 	   try
 	   {
 		   getConnection();
-		   String sql="INSERT INTO member VALUES(?,?,?,?,?,?,?,?,?,?,?,SYSDATE,'n')";
+		   String sql="INSERT INTO member VALUES(?,?,?,?,?,?,?,?,?,?,?,? 'n')";
 		   ps=conn.prepareStatement(sql);
 		   // ?에 값을 채운다 
 		   ps.setString(1, vo.getId());
@@ -207,7 +207,8 @@ public class MemberDAO {
 		   ps.setString(8, vo.getAddr2());
 		   ps.setString(9, vo.getPhone());
 		   ps.setString(10, vo.getEmail());
-		   ps.setString(11, vo.getContent());
+		   ps.setInt(11, vo.getEmpno());
+		   ps.setString(12, vo.getAdmin());
 		   
 		   // 추가 요청 
 		   ps.executeUpdate();// commit() 포함 => INSERT / UPDATE / DELETE 

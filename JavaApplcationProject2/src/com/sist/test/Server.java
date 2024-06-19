@@ -9,7 +9,7 @@ public class Server implements Runnable{
     // 접속 담당 
 	private ServerSocket ss;
 	// PORT => 0~65535 => 0~1023 
-	private final int PORT=3355;
+	private final int PORT=2226;
 	private MemberDAO dao;
 	// 저장 공간 (접속자)
 	private Vector<Client>  waitVc=new Vector<Client>();
@@ -209,8 +209,7 @@ public class Server implements Runnable{
 								   +vo.getSex()+"|"
 								   +vo.getAddr1()+"|"
 								   +vo.getEmail()+"|"
-								   +vo.getPhone()+"|"
-								   +vo.getContent());
+								   +vo.getPhone());
 					  }
 					  break;
 					  

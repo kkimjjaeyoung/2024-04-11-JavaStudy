@@ -17,8 +17,9 @@ package com.sist.dao;
 import java.util.*;
 
 import lombok.Data;
+import oracle.sql.CHAR;
 @Data
 public class MemberVO {
-   private String id,pwd,name,sex,birthday,post,addr1,addr2,phone,email,content,admin;
-   private Date regdate;
+   private String id,pwd,name,sex, post,addr1,addr2,phone,email,admin, birthday;
+   private int empno;
 }

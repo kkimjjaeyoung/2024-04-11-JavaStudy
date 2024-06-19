@@ -45,7 +45,7 @@ public class GoodsDetailPanel extends JPanel implements ActionListener,ItemListe
 	  la8.setBounds(470, 190, 120, 30);
 	  add(la8);
 	  b1=new JButton("장바구니");
-	  b2=new JButton("목록");
+	  b2=new JButton("목록으로 돌아가기");
 	  JPanel p=new JPanel();
 	  p.add(b1);p.add(b2);
 	  p.setBounds(470,350 , 350 , 35);

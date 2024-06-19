@@ -5,19 +5,18 @@ import javax.swing.border.LineBorder;
 
 import com.sist.dao.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 import com.sist.commons.*;
 import java.util.*;
 import java.net.*;
+
 public class HomePanel extends JPanel implements ActionListener,MouseListener{
     JPanel pan=new JPanel(); // 12개 이미지 출력 
     JButton b1,b2; // 이전 , 다음 
-    JLabel la=new JLabel("0 page / 0 pages");
-    JLabel[] imgs=new JLabel[12]; 
+    JLabel pagename, laname, laprice;
+    JLabel la=new JLabel("0 page / 0 pages");	//페이지 확인 라벨
+    JLabel[] imgs=new JLabel[16];			// 미리보기 이미지 라벨 
     
     int curpage=1; // 현재 페이지 
     int totalpage=0; // 총페이지 
@@ -27,11 +26,17 @@ public class HomePanel extends JPanel implements ActionListener,MouseListener{
     ControllPanel cp;
     public HomePanel(ControllPanel cp)
     {
+    	setLayout(null);
+    	pagename=new JLabel("사이트명", JLabel.CENTER);
+    	Font titlefont=new Font("맑은 고딕", Font.PLAIN, 35);
+    	pagename.setFont(titlefont);
+    	
     	this.cp=cp;
     	dao=GoodsDAO.newInstance();
-    	pan.setLayout(new GridLayout(3,4,5,5));
+    	pan.setLayout(new GridLayout(4,4,3,30));
     	
     	setLayout(new BorderLayout());
+    	add("North", pagename);
     	add("Center",pan);
     	b1=new JButton("이전");
     	b2=new JButton("다음");
@@ -42,6 +47,7 @@ public class HomePanel extends JPanel implements ActionListener,MouseListener{
     	
     	b1.addActionListener(this);
     	b2.addActionListener(this);
+    	
     }
     public void print()
     {
@@ -52,11 +58,11 @@ public class HomePanel extends JPanel implements ActionListener,MouseListener{
     		GoodsVO vo=list.get(i);
     		try
     		{
-    			URL url=new URL(vo.getGoods_poster());
-    			Image img=ImageChange.getImage(new ImageIcon(url), 240, 200);
-    			// 이미지 크기 축소 
-    			imgs[i]=new JLabel(new ImageIcon(img));
-    			imgs[i].setToolTipText(vo.getGoods_name()+"^"+vo.getNo());
+    			URL url=new URL(vo.getGoods_poster());					// 제품 화면
+    			Image img=ImageChange.getImage(new ImageIcon(url), 160, 128);			// 이미지 크기 축소 
+    			imgs[i]=new JLabel(new ImageIcon(img));			// 이미지 미리보기 아이콘
+    			imgs[i].setToolTipText(vo.getGoods_price()+"^"+vo.getNo());
+    			imgs[i].setText(vo.getGoods_name());
     			pan.add(imgs[i]);
     			imgs[i].addMouseListener(this);
     		}catch(Exception ex){}
@@ -95,7 +101,7 @@ public class HomePanel extends JPanel implements ActionListener,MouseListener{
 		}
 	}
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	public void mouseClicked(MouseEvent e) {			//이미지 클릭시 상세페이지 출력
 		// TODO Auto-generated method stub
 		for(int i=0;i<imgs.length;i++)
 		{
@@ -128,7 +134,7 @@ public class HomePanel extends JPanel implements ActionListener,MouseListener{
 		{
 			if(e.getSource()==imgs[i])
 			{
-				imgs[i].setBorder(new LineBorder(Color.red,3));
+				imgs[i].setBorder(new LineBorder(Color.gray,1));
 			}
 		}
 	}
@@ -145,8 +151,3 @@ public class HomePanel extends JPanel implements ActionListener,MouseListener{
 	}
     
 }
-
-
-
-
-
