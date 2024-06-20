@@ -203,15 +203,18 @@ public class FindPanel extends JPanel implements ActionListener,MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource()==table)
-		{
-		if(e.getClickCount()==2)
-			{
-				int row=table.getSelectedRow();
-				String no=model.getValueAt(row, 0).toString();
-				cp.dp.print(Integer.parseInt(no));
-				cp.card.show(cp, "DP");
-			}
+		if(e.getSource()==table){
+			//if(e.getClickCount()==1) {
+			//	int row=table.getSelectedRow();
+			//	String no=model.getValueAt(row, 1).toString();
+				
+			//}
+			if(e.getClickCount()==2){
+					int row=table.getSelectedRow();
+					String no=model.getValueAt(row, 0).toString();
+					cp.dp.print(Integer.parseInt(no));
+					cp.card.show(cp, "DP");
+				}
 		}
 	}
 	@Override
@@ -227,7 +230,7 @@ public class FindPanel extends JPanel implements ActionListener,MouseListener{
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
