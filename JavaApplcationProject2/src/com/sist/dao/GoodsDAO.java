@@ -197,7 +197,7 @@ public class GoodsDAO {
     	 try
     	 {
     		 getConnection();
-    		 String sql="SELECT no,goods_name,goods_poster,goods_price "
+    		 String sql="SELECT no,goods_name,goods_poster,goods_price,hit "
     				   +"FROM goods_all "
     				   +"WHERE goods_name LIKE '%'||?||'%' "
     				   +"ORDER BY no ASC";
@@ -212,7 +212,7 @@ public class GoodsDAO {
     			 vo.setGoods_name(rs.getString(2));
     			 vo.setGoods_poster(rs.getString(3));
     			 vo.setGoods_price(rs.getString(4));
-    			 
+    			 vo.setHit(rs.getInt(5));
     			 list.add(vo);
     		 }
     		 rs.close();
@@ -232,7 +232,7 @@ public class GoodsDAO {
     	 try
     	 {
     		 getConnection();
-    		 String sql="SELECT no,goods_name,goods_poster,goods_price "
+    		 String sql="SELECT no,goods_name,goods_poster,goods_price,hit "
     				   +"FROM goods_all "
     				   +"WHERE no = ? "
     				   +"ORDER BY no ASC";
@@ -247,7 +247,7 @@ public class GoodsDAO {
     			 vo.setGoods_name(rs.getString(2));
     			 vo.setGoods_poster(rs.getString(3));
     			 vo.setGoods_price(rs.getString(4));
-    			 
+    			 vo.setHit(rs.getInt(5));
     			 list.add(vo);
     		 }
     		 rs.close();
@@ -267,13 +267,13 @@ public class GoodsDAO {
     	 try
     	 {
     		 getConnection();
-    		 String sql="SELECT no,goods_name,goods_poster,goods_price "
+    		 String sql="SELECT no,goods_name,goods_poster,goods_price,hit "
     				   +"FROM goods_all "
     				   +"WHERE goods_name LIKE '%'||?||'%' OR goods_sub LIKE '%'||?||'%' "
     				   +"ORDER BY no ASC";
     		 ps=conn.prepareStatement(sql);
     		 ps.setString(1, name);
-    		 ps.setString(2, name);
+    		 ps.setString(2, sql);
     		 
     		 ResultSet rs=ps.executeQuery();
     		 while(rs.next())
@@ -283,7 +283,7 @@ public class GoodsDAO {
     			 vo.setGoods_name(rs.getString(2));
     			 vo.setGoods_poster(rs.getString(3));
     			 vo.setGoods_price(rs.getString(4));
-    			 
+    			 vo.setHit(rs.getInt(5));
     			 list.add(vo);
     		 }
     		 rs.close();

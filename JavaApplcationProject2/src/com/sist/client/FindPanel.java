@@ -38,7 +38,7 @@ public class FindPanel extends JPanel implements ActionListener,MouseListener{
     	add("North",p);
     	
     	String[] col={"상품번호","상품 이미지","상품명","가격","조회수"};
-    	Object[][] row=new Object[0][5];
+    	Object[][] row=new Object[0][6];
     	
     	model=new DefaultTableModel(row,col)
     	{
@@ -58,7 +58,7 @@ public class FindPanel extends JPanel implements ActionListener,MouseListener{
     	};
     	
     	table=new JTable(model);
-    	table.setRowHeight(35);
+    	table.setRowHeight(50);
     	table.getTableHeader().setReorderingAllowed(false);
     	table.setShowVerticalLines(false);
     	JScrollPane js=new JScrollPane(table);
@@ -70,11 +70,11 @@ public class FindPanel extends JPanel implements ActionListener,MouseListener{
     		if(i==0)
     			column.setPreferredWidth(30);
     		else if(i==1)
-    			column.setPreferredWidth(100);
+    			column.setPreferredWidth(80);
     		else if(i==2)
-    			column.setPreferredWidth(500);
+    			column.setPreferredWidth(600);
     		else if(i==3)
-    			column.setPreferredWidth(120);
+    			column.setPreferredWidth(80);
     		else if(i==4)
     			column.setPreferredWidth(30);
     	}
@@ -117,7 +117,7 @@ public class FindPanel extends JPanel implements ActionListener,MouseListener{
 					{
 						URL url=new URL(vo.getGoods_poster());
 						//System.out.println(vo.getGoods_poster());
-						Image img=ImageChange.getImage(new ImageIcon(url), 35, 35);
+						Image img=ImageChange.getImage(new ImageIcon(url), 50, 50);
 						Object[] obj={
 							vo.getNo(),
 							new ImageIcon(img),
@@ -150,7 +150,7 @@ public class FindPanel extends JPanel implements ActionListener,MouseListener{
 						{
 							URL url=new URL(vo.getGoods_poster());
 							//System.out.println(vo.getGoods_poster());
-							Image img=ImageChange.getImage(new ImageIcon(url), 35, 35);
+							Image img=ImageChange.getImage(new ImageIcon(url), 50, 50);
 							Object[] obj={
 								vo.getNo(),
 								new ImageIcon(img),
@@ -183,7 +183,7 @@ public class FindPanel extends JPanel implements ActionListener,MouseListener{
 						{
 							URL url=new URL(vo.getGoods_poster());
 							//System.out.println(vo.getGoods_poster());
-							Image img=ImageChange.getImage(new ImageIcon(url), 35, 35);
+							Image img=ImageChange.getImage(new ImageIcon(url), 50, 50);
 							Object[] obj={
 								vo.getNo(),
 								new ImageIcon(img),
