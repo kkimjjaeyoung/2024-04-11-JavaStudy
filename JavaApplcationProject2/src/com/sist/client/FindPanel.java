@@ -164,7 +164,7 @@ public class FindPanel extends JPanel implements ActionListener,MouseListener{
 					}
 				}
 			}
-			else if(box1.getSelectedIndex()==2) {				//combobox가 "상품번호"일때
+			else if(box1.getSelectedIndex()==2) {				//combobox가 "상품번호+상품설명"일때
 				ArrayList<GoodsVO> list=dao.goodsFindData3(name);
 				if(list.size()<1)
 				{
