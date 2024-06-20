@@ -21,6 +21,7 @@ public class HomePanel extends JPanel implements ActionListener, MouseListener{
 	
 	int curpage=1;		//현재 페이지
 	int totalpage=0;	//총 페이지
+	String myId;
 	
 	GoodsDAO dao;		//데이터베이스 연결
 	ControllPanel cp;
@@ -95,6 +96,7 @@ public class HomePanel extends JPanel implements ActionListener, MouseListener{
 		for(int i=0; i<imgs.length; i++) {
 			if(e.getSource()==imgs[i]) {
 				if(e.getClickCount()==2) {
+					
 					cp.card.show(cp, "DP");
 				}
 			}

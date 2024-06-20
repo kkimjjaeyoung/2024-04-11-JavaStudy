@@ -1,5 +1,6 @@
-	package com.sist.dao;
+package com.sist.dao;
 import java.util.*;
+import java.util.Date;
 import java.sql.*;
 /*
  *   1. JDBC (자바에서 데이터베이스 연결하는 라이브러리) => java.sql
@@ -78,7 +79,7 @@ public class GoodsDAO {
      // SQL문장 송수신 
      private PreparedStatement ps;
      // 오라클 주소 저장 => 변경 (X) => 상수 
-     private final String URL="jdbc:oracle:thin:@192.168.10.124:1521:XE";
+     private final String URL="jdbc:oracle:thin:@localhost:1521:XE";
      
      // 싱글턴 => 메모리 누수 현상 방지 => 객체를 한번만 생성 => DAO 
      private static GoodsDAO dao;
@@ -95,7 +96,7 @@ public class GoodsDAO {
      {
     	 try
     	 {
-    		 conn=DriverManager.getConnection(URL,"hr3","happy"); 
+    		 conn=DriverManager.getConnection(URL,"hr","happy"); 
     	 }catch(Exception ex) {}
      }
      // 3. 오라클 해제
@@ -217,43 +218,60 @@ public class GoodsDAO {
      }
      // 상세보기 => 한개에 대한 정보 
      /*
-      *   NO                                                 NUMBER(38)
-      GOODS_NAME                                         VARCHAR2(4000)
-      GOODS_SUB                                          VARCHAR2(4000)
-      GOODS_PRICE                                        VARCHAR2(26)
-      GOODS_DISCOUNT                                     NUMBER(38)
-      GOODS_FIRST_PRICE                                  VARCHAR2(26)
-      GOODS_DELIVERY                                     VARCHAR2(26)
-      GOODS_POSTER                                       VARCHAR2(4000)
+      * NO                                                 NUMBER(38)
+		 GOODS_NAME                                         VARCHAR2(4000)
+		 GOODS_SUB                                          VARCHAR2(4000)
+		 GOODS_PRICE                                        VARCHAR2(26)
+		 GOODS_DISCOUNT                                     NUMBER(38)
+		 GOODS_FIRST_PRICE                                  VARCHAR2(26)
+		 GOODS_DELIVERY                                     VARCHAR2(26)
+		 GOODS_POSTER 
       */
-     public GoodsVO goodsDetailData(int no) {
+     public GoodsVO goodsDetailData(int no)
+     {
     	 GoodsVO vo=new GoodsVO();
-    	 try {
+    	 try
+    	 {
     		 getConnection();
-    		 String sql="UPDATE goods+all SET"
-    		 		+ "hit=hit+1"
-    		 		+ "WHERE no=?";
+    		 // 조회수 증가 
+    		 String sql="UPDATE goods_all SET "
+    				   +"hit=hit+1 "
+    				   +"WHERE no=?";
     		 ps=conn.prepareStatement(sql);
     		 ps.setInt(1, no);
-    		 ps.executeUpdate();		//commit
+    		 ps.executeUpdate(); // commit()
     		 
-    		 //데이터 읽기
-    		 sql="SELECT no, goods_name, goods_sub, goods_price, goods_discount, goods_first_price, goods_delivery, goods_poster"
-    		 		+ "FROM goods_all"
-    		 		+ "WHERE no=?";
+    		 // 데이터 읽기
+    		 sql="SELECT no,goods_name,goods_sub,goods_price,goods_discount,"
+    		    +"goods_first_price,goods_delivery,goods_poster "
+    			+"FROM goods_all "
+    		    +"WHERE no=?";
     		 
     		 ps=conn.prepareStatement(sql);
-    		 //?에 값채우기
+    		 // ?에 값을 채운다 
     		 ps.setInt(1, no);
     		 
-    		 //결과값
-    		 ResultSet re=ps.executeQuery();
-    		 re.next();
-    		 //값을 vo에 저장
-    		 re.close();
-    	 }catch (Exception ex) {
+    		 // 결과값 
+    		 ResultSet rs=ps.executeQuery();
+    		 rs.next();
+    		 // 값을 VO에 저장 
+    		 vo.setNo(rs.getInt(1));
+    		 vo.setGoods_name(rs.getString(2));
+    		 vo.setGoods_sub(rs.getString(3));
+    		 vo.setGoods_price(rs.getString(4));
+    		 vo.setGoods_discount(rs.getInt(5));
+    		 vo.setGoods_first_price(rs.getString(6));
+    		 vo.setGoods_delivery(rs.getString(7));
+    		 vo.setGoods_poster(rs.getString(8));
+    		 rs.close();
+    		 
+    		 
+    	 }catch(Exception ex)
+    	 {
     		 ex.printStackTrace();
-    	 }finally {
+    	 }
+    	 finally
+    	 {
     		 disConnection();
     	 }
     	 return vo;
@@ -295,5 +313,101 @@ public class GoodsDAO {
     	 return list;
      }
      // 구매 => INSERT , UPDATE , DELETE 
+     /*
+      *   private int cno,gno,price,account;
+          private String id;
+          private Date regdate;
+      */
+     public void cartInsert(CartVO vo)
+     {
+    	 try
+    	 {
+    		 getConnection();
+    		 String sql="INSERT INTO cart(cno,gno,id,price,account) "
+    				   +"VALUES(cart_cno_seq.nextval,?,?,?,?)";
+    		 ps=conn.prepareStatement(sql);
+    		 ps.setInt(1, vo.getGno());
+    		 ps.setString(2, vo.getId());
+    		 ps.setInt(3, vo.getPrice());
+    		 ps.setInt(4, vo.getAccount());
+    		 
+    		 ps.executeUpdate();
+    	 }catch(Exception ex)
+    	 {
+    		 ex.printStackTrace();
+    	 }
+    	 finally
+    	 {
+    		 disConnection();
+    	 }
+     }
+     public void cartCancel(int cno)
+     {
+    	 try
+    	 {
+    		 getConnection();
+    		 String sql="DELETE FROM cart "
+    				   +"WHERE cno="+cno;
+    		 ps=conn.prepareStatement(sql);
+    		 ps.executeUpdate();
+    	 }catch(Exception ex)
+    	 {
+    		 ex.printStackTrace();
+    	 }
+    	 finally
+    	 {
+    		 disConnection();
+    	 }
+     }
+     /*
+      *   설계 => 테이블 설계 ==> 6,7장 = 정규화 
+      *   ---------------
+      *   시퀀스 
+      *   인덱스 : 자주 검색 / 데이터 출력이 많은 경우 => 속도 최적화 
+      *   ---------------------------------------------
+      *   자주 사용하는 SQL : View 
+      *   테이블 여러개 연결 : Join / SubQuery 
+      *   ---------------------------------------------
+      *   반복 수행 => 댓글 => 함수 => PL/SQL 
+      *   SQL소스량을 줄인다 => 자동화 처리 => Trigger 
+      */
+     public List<CartVO> cartSelect(String id)
+     {
+    	 List<CartVO> list=new ArrayList<CartVO>();
+    	 try
+    	 {
+    		 getConnection();
+    		 String sql="SELECT cno,price,account,"
+    				   +"(SELECT goods_poster FROM goods_all WHERE no=cart.gno),"
+    				   +"(SELECT goods_name FROM goods_all WHERE no=cart.gno),"
+    				   +"(SELECT goods_price FROM goods_all WHERE no=cart.gno) "
+    				   +"FROM cart "
+    				   +"WHERE id=?";
+    		 ps=conn.prepareStatement(sql);
+    		 ps.setString(1, id);
+    		 ResultSet rs=ps.executeQuery();
+    		 while(rs.next())
+    		 {
+    			 CartVO vo=new CartVO();
+    			 vo.setCno(rs.getInt(1));
+    			 vo.setPrice(rs.getInt(2));
+    			 vo.setAccount(rs.getInt(3));
+    			 vo.getGvo().setGoods_poster(rs.getString(4));
+    			 vo.getGvo().setGoods_name(rs.getString(5));
+    			 vo.getGvo().setGoods_price(rs.getString(6));
+    			 list.add(vo);
+    		 }
+    		 rs.close();
+    		 
+    	 }catch(Exception ex)
+    	 {
+    		 ex.printStackTrace();
+    	 }
+    	 finally
+    	 {
+    		 disConnection();
+    	 }
+    	 return list;
+     }
      
 }

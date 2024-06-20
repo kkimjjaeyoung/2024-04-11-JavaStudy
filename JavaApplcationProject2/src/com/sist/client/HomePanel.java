@@ -17,7 +17,7 @@ public class HomePanel extends JPanel implements ActionListener,MouseListener{
     JButton b1,b2; // 이전 , 다음 
     JLabel pagename;
     JLabel la=new JLabel("0 page / 0 pages");	//페이지 확인 라벨
-    JLabel[] imgs=new JLabel[12];			// 미리보기 이미지 라벨 
+    JLabel[] imgs=new JLabel[16];			// 미리보기 이미지 라벨 
     //JLabel[] titles=new JLabel[12];
     
     int curpage=1; // 현재 페이지 
@@ -35,8 +35,8 @@ public class HomePanel extends JPanel implements ActionListener,MouseListener{
     	
     	this.cp=cp;
     	dao=GoodsDAO.newInstance();
-    	pan.setLayout(new GridLayout(4,3,3,30));
-    	//panplus.setLayout(new GridLayout(2,1,0,0));
+    	pan.setLayout(new GridLayout(4,4,3,3));
+    	//panplus.setLayout(new GridLayout(4,3,3,30));
     	
     	setLayout(new BorderLayout());
     	add("North", pagename);
@@ -64,18 +64,21 @@ public class HomePanel extends JPanel implements ActionListener,MouseListener{
     			URL url=new URL(vo.getGoods_poster());					// 제품 화면
     			Image img=ImageChange.getImage(new ImageIcon(url), 160, 120);			// 이미지 크기 축소 
     			imgs[i]=new JLabel(new ImageIcon(img));			// 이미지 미리보기 아이콘
-    			imgs[i].setToolTipText("가격 : "+vo.getGoods_price()+" 조회수 : "+vo.getHit()+" - No."+vo.getNo());
-    			imgs[i].setText(vo.getGoods_name());
+    			imgs[i].setToolTipText("제품명 : "+vo.getGoods_name()+"가격 : "+vo.getGoods_price()+" 조회수 : "+vo.getHit()+" - No."+vo.getNo());
+    			//imgs[i].setText(vo.getGoods_name());
 				
     			//titles[i]=new JLabel();
     			//titles[i].setText(vo.getGoods_name());
     			
-    			//panplus.add(imgs[i], "Notrh");
-    			//panplus.add(titles[i], "South");
+    			//panplus.setLayout(new BorderLayout());
+    			//panplus.add(imgs[i], BorderLayout.NORTH);
+    			//panplus.add(titles[i], BorderLayout.SOUTH);
+    			
+    			//pan.setLayout(new BorderLayout());
     			
     			//pan.add(panplus);
     			pan.add(imgs[i]);
-    			//pan.add(titles[i]);
+    			//pan.add(titles[i], BorderLayout.SOUTH);
     			
     			imgs[i].addMouseListener(this);
     			
@@ -91,6 +94,8 @@ public class HomePanel extends JPanel implements ActionListener,MouseListener{
     	}
     	pan.removeAll();
     	pan.validate();
+    	//panplus.removeAll();
+    	//panplus.validate();
     }
 	@Override
 	public void actionPerformed(ActionEvent e) {

@@ -114,7 +114,7 @@ public class FindPanelEmp extends JPanel implements ActionListener, MouseListene
 			if(e.getClickCount()==2) {
 				int row=table.getSelectedRow();
 				String no=model.getValueAt(row, 0).toString();
-				cp.dp.print(Integer.parseInt(no));
+				cp.dp.print(Integer.parseInt(no), no);
 				cp.card.show(cp,"DP");
 			}
 		}
