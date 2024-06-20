@@ -31,12 +31,13 @@ public class FindPanel extends JPanel implements ActionListener,MouseListener{
     	box1=new JComboBox<String>();
     	box1.addItem("상품명");
     	box1.addItem("상품번호");
+    	box1.addItem("상품명+상품설명");
     	
     	p.add(box1);
     	p.add(tf);p.add(b);
     	add("North",p);
     	
-    	String[] col={"상품번호","상품 이미지","상품명","가격", "조회수"};
+    	String[] col={"상품번호","상품 이미지","상품명","가격","조회수"};
     	Object[][] row=new Object[0][5];
     	
     	model=new DefaultTableModel(row,col)
@@ -132,6 +133,39 @@ public class FindPanel extends JPanel implements ActionListener,MouseListener{
 			}
 			else if(box1.getSelectedIndex()==1) {				//combobox가 "상품번호"일때
 				ArrayList<GoodsVO> list=dao.goodsFindData2(name);
+				if(list.size()<1)
+				{
+					JOptionPane.showMessageDialog(this, "검색된 결과가 없습니다");
+				}
+				else
+				{
+					for(int i=model.getRowCount()-1;i>=0;i--)
+					{
+						model.removeRow(i);
+					}
+					System.out.println(list.size());
+					for(GoodsVO vo:list)
+					{
+						try
+						{
+							URL url=new URL(vo.getGoods_poster());
+							//System.out.println(vo.getGoods_poster());
+							Image img=ImageChange.getImage(new ImageIcon(url), 35, 35);
+							Object[] obj={
+								vo.getNo(),
+								new ImageIcon(img),
+								vo.getGoods_name(),
+								vo.getGoods_price(),
+								vo.getHit()
+							};
+							model.addRow(obj);
+							
+						}catch(Exception ex){}
+					}
+				}
+			}
+			else if(box1.getSelectedIndex()==2) {				//combobox가 "상품번호"일때
+				ArrayList<GoodsVO> list=dao.goodsFindData3(name);
 				if(list.size()<1)
 				{
 					JOptionPane.showMessageDialog(this, "검색된 결과가 없습니다");

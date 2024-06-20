@@ -199,7 +199,7 @@ public class GoodsDAO {
     		 getConnection();
     		 String sql="SELECT no,goods_name,goods_poster,goods_price "
     				   +"FROM goods_all "
-    				   +"WHERE goods_name LIKE '%'||?||'%', "
+    				   +"WHERE goods_name LIKE '%'||?||'%' "
     				   +"ORDER BY no ASC";
     		 ps=conn.prepareStatement(sql);
     		 ps.setString(1, name);
@@ -238,6 +238,42 @@ public class GoodsDAO {
     				   +"ORDER BY no ASC";
     		 ps=conn.prepareStatement(sql);
     		 ps.setString(1, name);
+    		 
+    		 ResultSet rs=ps.executeQuery();
+    		 while(rs.next())
+    		 {
+    			 GoodsVO vo=new GoodsVO();
+    			 vo.setNo(rs.getInt(1));
+    			 vo.setGoods_name(rs.getString(2));
+    			 vo.setGoods_poster(rs.getString(3));
+    			 vo.setGoods_price(rs.getString(4));
+    			 
+    			 list.add(vo);
+    		 }
+    		 rs.close();
+    	 }catch(Exception ex)
+    	 {
+    		 ex.printStackTrace();
+    	 }
+    	 finally
+    	 {
+    		 disConnection();
+    	 }
+    	 return list;
+     }
+     public ArrayList<GoodsVO> goodsFindData3(String name)
+     {
+    	 ArrayList<GoodsVO> list=new ArrayList<GoodsVO>();
+    	 try
+    	 {
+    		 getConnection();
+    		 String sql="SELECT no,goods_name,goods_poster,goods_price "
+    				   +"FROM goods_all "
+    				   +"WHERE goods_name LIKE '%'||?||'%' OR goods_sub LIKE '%'||?||'%' "
+    				   +"ORDER BY no ASC";
+    		 ps=conn.prepareStatement(sql);
+    		 ps.setString(1, name);
+    		 ps.setString(2, name);
     		 
     		 ResultSet rs=ps.executeQuery();
     		 while(rs.next())
