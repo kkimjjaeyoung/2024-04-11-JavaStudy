@@ -64,7 +64,7 @@ public class HomePanel extends JPanel implements ActionListener,MouseListener{
     			URL url=new URL(vo.getGoods_poster());					// 제품 화면
     			Image img=ImageChange.getImage(new ImageIcon(url), 160, 120);			// 이미지 크기 축소 
     			imgs[i]=new JLabel(new ImageIcon(img));			// 이미지 미리보기 아이콘
-    			imgs[i].setToolTipText("제품명 : "+vo.getGoods_name()+"가격 : "+vo.getGoods_price()+" 조회수 : "+vo.getHit()+" - No."+vo.getNo());
+    			imgs[i].setToolTipText("제품명 : "+vo.getGoods_name()+" 가격 : "+vo.getGoods_price()+" 조회수 : "+vo.getHit()+" - No."+vo.getNo());
     			//imgs[i].setText(vo.getGoods_name());
 				
     			//titles[i]=new JLabel();
