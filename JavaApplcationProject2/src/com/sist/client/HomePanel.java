@@ -30,8 +30,9 @@ public class HomePanel extends JPanel implements ActionListener,MouseListener{
     {
     	setLayout(null);
     	pagename=new JLabel("상품 페이지", JLabel.CENTER);				//페이지 제목
-    	Font titlefont=new Font("맑은 고딕", Font.PLAIN, 35);			//페이지 제목 폰트 설정
+    	Font titlefont=new Font("맑은 고딕", Font.BOLD, 35);			//페이지 제목 폰트 설정
     	pagename.setFont(titlefont);								//페이지 제목 폰트 적용
+    	pagename.setForeground(Color.PINK);
     	
     	this.cp=cp;
     	dao=GoodsDAO.newInstance();
