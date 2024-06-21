@@ -230,7 +230,7 @@ public class FindPanel extends JPanel implements ActionListener,MouseListener{
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-
+		
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {

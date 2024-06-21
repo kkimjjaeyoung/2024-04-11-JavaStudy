@@ -16,7 +16,7 @@ public class EmpDAO {
 	 *                  ---------------- VO,DAO 변경이 없다        
 	 */
 	// 자바 12장 
-	private final String URL="jdbc:oracle:thin:@192.168.10.124:1521:XE";
+	private final String URL="jdbc:oracle:thin:@localhost:1521:XE";
 	// 싱글턴 => 한개의 객체가 사용이 가능 => 오라클 연동
 	private static EmpDAO dao;
 	/*

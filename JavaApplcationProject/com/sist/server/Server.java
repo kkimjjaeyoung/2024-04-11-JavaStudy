@@ -26,7 +26,7 @@ public class Server implements Runnable{
 	 * 		3조 : 4852
 	 */
 	private ServerSocket ss;
-	private final int PORT=4582;
+	private final int PORT=1521;
 	//클라이언트 정보 저장(ip, port, id, name, sex) -> Oracle에서 정보 가져온다
 	private Vector<client> waitVc=new Vector<client>();
 	public Server() {
@@ -49,13 +49,15 @@ public class Server implements Runnable{
 				 * 서버 : ServerSocket -> Port : 고정
 				 * 클라이언트 : Socket -> Port 자동 설정
 				 */
-				System.out.println("접속 IP"+ s.getInetAddress().getHostAddress()); 	//
-				System.out.println("포트번호"+ s.getPort());
-				OutputStream out=s.getOutputStream();		//s=클라이언트
-				out.write("서버 접속 성공\n.".getBytes()); 		//getBytes로 전송
+				/*
+				 * System.out.println("접속 IP"+ s.getInetAddress().getHostAddress()); //
+				 * System.out.println("포트번호"+ s.getPort()); OutputStream
+				 * out=s.getOutputStream(); //s=클라이언트 out.write("서버 접속 성공\n.".getBytes());
+				 * //getBytes로 전송
+				 */
 				client client=new client(s);
 				waitVc.add(client);
-				
+				client.start();
 			}
 		}catch(Exception ex) {}
 	}
@@ -82,11 +84,15 @@ public class Server implements Runnable{
 		//통신 역할
 		public void run() {
 			try {
-				//1. 클라이언트 요청을 받는다
-				String msg=in.readLine();
-				//2.서버에 응답
-				for(client client:waitVc) {		//접속한 모든이에게 문자 출력
-					client.out.write((msg+"\n").getBytes());
+				while(true)
+				{
+					//1. 클라이언트 요청을 받는다 
+					String msg=in.readLine();
+					System.out.println("Client=>"+msg);
+					//2.서버에 응답
+					for(client client:waitVc) {		//접속한 모든이에게 문자 출력
+						client.out.write((msg+"\n").getBytes());
+					}
 				}
 			}catch(Exception ex) {}
 		}

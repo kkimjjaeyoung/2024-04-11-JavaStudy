@@ -437,7 +437,7 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 					try
 					{
 						//1. 소켓 => 전화 걸기 
-						s=new Socket("localhost",3355); // 조별 
+						s=new Socket("localhost",1521); // 조별 
 						out=s.getOutputStream();
 						System.out.println("id="+id);
 						in=new BufferedReader(new InputStreamReader(s.getInputStream()));
